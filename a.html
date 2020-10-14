@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>..</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,300;1,500&display=swap" rel="stylesheet">
+    <style media="screen">
+
+      *{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Montserrat', sans-serif;
+      }
+
+      body{
+        position: relative;
+      }
+
+      /* --------------- contact button --------------- */
+
+      .con-b{
+        padding: 2rem;
+      }
+
+      button{
+        padding: 0.5rem 1rem;
+        color: white;
+        background-color: #00e600;
+        outline: none;
+        border: none;
+        box-shadow: 0px 0px 7px 0px black;
+        border-radius: 7px;
+        margin-top: 1.5rem;
+        cursor: pointer;
+      }
+
+      button:hover{
+        opacity: 0.7;
+      }
+
+      /* ================== popup box ============= */
+
+      .popup-box{
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        display: none;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      /* ================== popup visible box ====================== */
+
+      .popup{
+        background-color: white;
+        border-radius: 5px;
+        position: fixed;
+        width: 500px;
+        height: 300px;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      /* ============== image and close button ================== */
+
+      .containerimg{
+        position: relative;
+      }
+
+      /* ================== image ================== */
+
+      .popup-box img{
+        width: 25%;
+        height: auto;
+        border-radius: 50%;
+        position: absolute;
+        background-color: #ccc;
+        border: 3px solid white;
+        box-shadow: 0px 0px 10px 0px black;
+        left: 50%;
+        bottom: 100%;
+        transform: translate(-50%, 50%);
+      }
+
+      /* ================== close button ================== */
+
+      span.close{
+        position: absolute;
+        display: flex;
+        align-items: baseline;
+        padding: 0.2rem 0.6rem;
+        border-radius: 20px;
+        top: -1rem;
+        right: 2rem;
+        transition: 0.2s ease;
+        cursor: pointer;
+        border: 2.3px solid red;
+        background-color: white;
+      }
+
+      span.close:hover{
+        background-color: red;
+      }
+
+      span.close .closetxt{
+        font-size: 1.2rem;
+        font-weight: 600;
+        font-style: normal;
+        display: inline-block;
+        color: red;
+        margin-right: 0.5rem;
+      }
+
+      span.close .fa-times{
+        font-size: 1.2rem;
+        color: red;
+      }
+
+      span.close:hover .fa-times, span.close:hover .closetxt{
+        color: white;
+      }
+
+      /* -------------------- data ----------------- */
+
+      .data {
+        margin: auto;
+        margin-top: 15%;
+        width: 90%;
+        text-align: center;
+        font-weight: bold;
+        font-size: 1.5rem;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .data .name{
+        flex: 1;
+        margin-bottom: 1.2rem;
+        margin-top: 0.5rem;
+      }
+
+      .data .details{
+        flex: 1;
+        display: flex;
+        justify-content: space-around;
+        padding: 2rem;
+      }
+
+      .t_link{
+        margin-right: 1.5rem;
+        cursor: pointer;
+      }
+
+      .t_link:hover{
+        opacity: 0.8;
+      }
+
+      .t_link:last-child{
+        margin-right: 0;
+      }
+
+      .t_link i{
+        color: white;
+        box-shadow: 0px 0px 7px 0px black;
+        font-size: 1.5rem;
+        border-radius: 10px;
+      }
+
+      .t-pno i{
+        background-color: #4285F4;
+        padding: 16px 20.5px;
+      }
+
+      .t-mail i{
+        background-color: #FBBC05;
+        padding: 16px;
+      }
+
+      .t-loc i{
+        background-color: #34A853;
+        padding: 16px 19px;
+      }
+
+      .t-lin i{
+        background-color: #EA4335;
+        padding: 16px 17.5px;
+      }
+
+      /* =================== inlinkbox ============== */
+
+
+      .inlinkbox{
+        position: absolute;
+        bottom: 0;
+        top: 0;
+        display: none;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+
+      /* ========= innerpopup links ================ */
+
+      .inlink{
+        display: none;
+        padding: 0 1rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 350px;
+        height: 450px;
+        background-color: rgba(0, 0, 0, 0.9);
+        border-radius: 20px;
+        z-index: 1;
+      }
+
+      .inlink i{
+        margin: 4rem auto 3rem;
+        display: block;
+        text-align: center;
+        font-size: 8rem;
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .inlink p{
+        font-weight: 600;
+        text-align: center;
+        color: white;
+        font-size: 1.5rem;
+        padding: 0 0.5rem;
+        margin-bottom: 3rem;
+      }
+
+      .inlinkclose, .inlink a{
+        cursor: pointer;
+        display: block;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 700;
+        padding: 0.5rem 1rem;
+        color: white;
+        background-color: rgba(255, 255, 255, 0.3);
+        border-radius: 5px;
+        transition: 0.3s ease;
+      }
+
+      .inlinkclose{
+        margin-top: 1rem;
+        font-size: 1.4rem;
+        font-weight: normal;
+      }
+
+      .inlinkclose:hover, .inlink a:hover{
+        box-shadow: 0px 0px 10px 0px #ccc;
+      }
+
+      .inlink a{
+        text-decoration: none;
+      }
+
+      .pnolink a{
+        background-color: rgb(0, 230, 0);
+      }
+
+      .maillink a{
+        background-color: rgb(234, 67, 53);
+      }
+
+      .loclink a{
+        background-color: #34A853;
+      }
+
+      .linlink a{
+        background-color: rgb(59, 89, 152);
+      }
+
+
+
+      /* --------------- media queries --------------- */
+
+    </style>
+  </head>
+  <body>
+    <div class="con-b">
+      <p class="des">Click the Button to POPUP.</p>
+      <button type="button" onclick="document.querySelector('.popup-box').style.display = 'block';">CONTACT </button>
+    </div>
+
+
+    <div class="popup-box">
+
+      <div class="popup">
+
+        <div class="containerimg">
+            <span class="close" onclick="document.querySelector('.popup-box').style.display = 'none';"> <i class="closetxt">close</i> <i class="fas fa-times"></i></span>
+            <img src="img.jpeg" width="120px" height= "120px">
+        </div>
+
+        <div class="data">
+
+          <div class="name">
+            <p>Guluru Vishwasai</p>
+          </div>
+
+          <div class="details">
+
+            <div class="t_link t-pno" onclick="inlinkOpen('pnolink');">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+
+            <div class="t_link t-mail" onclick="inlinkOpen('maillink');">
+              <i class="fas fa-envelope"></i>
+            </div>
+
+            <div class="t_link t-loc" onclick="inlinkOpen('loclink');">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+
+            <div class="t_link t-lin" onclick="inlinkOpen('linlink');">
+              <i class="fab fa-linkedin"></i>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- ============ popup ends =========== -->
+
+      <div class="inlinkbox">
+
+        <div class="inlink pnolink">
+          <i class="fas fa-mobile-alt"></i>
+          <p>+91-910-023-7458</p>
+          <a href="tel: +91-910-023-7458">CALL</a>
+          <span class="inlinkclose" onclick="document.querySelector('.inlinkbox').style.display = 'none';">close</span>
+        </div>
+
+        <div class="inlink maillink" style="width: 400px;">
+          <i class="fas fa-envelope"></i>
+          <p>srisaiguluru99@gmail.com</p>
+          <a href="mailto: srisaiguluru99@gmail.com">MAIL</a>
+          <span class="inlinkclose" onclick="document.querySelector('.inlinkbox').style.display = 'none';">close</span>
+        </div>
+
+        <div class="inlink loclink">
+          <i class="fas fa-map-marker-alt" style="margin-bottom: 2.3rem;"></i>
+          <p style="margin-bottom: 2rem;">Medchal, Telangana, India</p>
+          <a href="#">LOCATE</a>
+          <span class="inlinkclose" onclick="document.querySelector('.inlinkbox').style.display = 'none';">close</span>
+        </div>
+
+        <div class="inlink linlink">
+          <i class="fab fa-linkedin" style="margin-bottom: 2.3rem;"></i>
+          <p style="margin-bottom: 2rem;">www.linkedin.com/in/ srisai-guluru/</p>
+          <a href="https://www.linkedin.com/in/srisai-guluru/" target="_blank">OPEN LINK</a>
+          <span class="inlinkclose" onclick="document.querySelector('.inlinkbox').style.display = 'none';">close</span>
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+
+    <script type="text/javascript">
+
+      var i;
+      var inlinks = document.getElementsByClassName('inlink');
+
+      function inlinkOpen(tag)
+      {
+        document.querySelector('.inlinkbox').style.display = 'block';
+
+        for (i = 0; i < inlinks.length; i++)
+        {
+          inlinks[i].style.display = 'none';
+        }
+
+        document.getElementsByClassName(tag)[0].style.display = 'block';
+      }
+
+    </script>
+  </body>
+</html>
